@@ -1,7 +1,7 @@
 ifneq ($(KERNELRELEASE),)
 	obj-m := panic_test.o
 else
-	KERN_DIR ?= /usr/src/linux-headers-$(shell uname -r)/
+	KERN_DIR ?= /home/zheng/Temp/osFuzz/4.19.90-24.4.v2101.ky10.x86_64
 	PWD := $(shell pwd)
 default:
 	$(MAKE) -C $(KERN_DIR) M=$(PWD) modules
