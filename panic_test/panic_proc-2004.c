@@ -14,10 +14,10 @@ ssize_t test_read (struct file *, char __user *, size_t, loff_t *);
 ssize_t test_write (struct file *, const char __user *, size_t, loff_t *);
 
 
-static struct file_operations my_drv = {
-	.open = test_open,
-	.read = test_read,
-	.write = test_write,
+static struct proc_ops my_drv = {
+	.proc_open = test_open,
+	.proc_read = test_read,
+	.proc_write = test_write,
 };
 
 int test_open (struct inode * test_inode, struct file * test_file) {
@@ -42,7 +42,7 @@ ssize_t test_write (struct file *test_file, const char __user *buf, size_t size,
 int __init test_init(void)
 {
 	struct proc_dir_entry *test_entry;
-	const struct file_operations *my_fops = &my_drv;
+	const struct proc_ops *my_fops = &my_drv;
 	
 	test_entry = proc_create(MY_DEV_NAME, S_IRUGO|S_IWUGO, NULL, my_fops);
 	if (!test_entry)
